@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Login from "./Login/page";
 
 export default function Home() {
   return (
@@ -64,7 +63,6 @@ export default function Home() {
 
       <div>
         <h1 className="text-3xl font-bold underline">Hello world!</h1>
-        <Login />
       </div>
     </div>
   );
