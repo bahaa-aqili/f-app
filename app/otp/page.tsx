@@ -3,10 +3,29 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { auth } from "../lib/firebase";
+import { useEffect } from "react";
 
 export default function OTP() {
   const [otp, setOtp] = useState("");
   const router = useRouter();
+
+  // const submit = () => {
+  //   if (otp === "1234") {
+  //     useEffect(() => {
+  //       localStorage.setItem(
+  //         "user",
+  //         JSON.stringify({
+  //           uid: auth.currentUser?.uid,
+  //           email: auth.currentUser?.email,
+  //         }),
+  //       );
+  //     }, []);
+
+  //     router.push("/dashboard");
+  //   } else {
+  //     alert("OTP Failed");
+  //   }
+  // };
 
   const submit = () => {
     if (otp === "1234") {

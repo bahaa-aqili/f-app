@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { KeyRound, LayoutDashboard, LogOut, Users } from "lucide-react";
@@ -5,6 +6,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { signOut } from "firebase/auth";
 import { auth } from "../lib/firebase";
+import { useEffect } from "react";
 
 const menu = [
   {
@@ -29,9 +31,12 @@ export default function Sidebar() {
 
   const handleLogout = async () => {
     await signOut(auth);
-    localStorage.clear();
     router.push("/login");
   };
+
+  useEffect(() => {
+    localStorage.clear();
+  }, [handleLogout]);
 
   return (
     <aside className="w-64 min-h-screen bg-gray-50 border-r px-5 py-6 border-gray-300">
