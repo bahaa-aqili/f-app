@@ -14,7 +14,7 @@ export default function ProtectedRoute({
     const user = localStorage.getItem("user");
 
     if (!user) {
-      router.replace("/login");
+      router.push("/login");
     }
   }, []);
 
