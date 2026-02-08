@@ -16,7 +16,7 @@ export default function ProtectedRoute({
     if (!user) {
       router.replace("/login");
     }
-  }, [router]);
+  }, []);
 
   return <>{children}</>;
 }
