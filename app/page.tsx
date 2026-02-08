@@ -4,13 +4,14 @@ import { useRouter } from "next/navigation";
 
 export default function Home() {
   const router = useRouter();
-  const localUser = localStorage.getItem("user");
 
   useEffect(() => {
+    const localUser = localStorage.getItem("user");
+
     if (localUser !== null) {
-      router.push("/dashboard");
+      router.replace("/dashboard");
     } else {
-      router.push("/login");
+      router.replace("/login");
     }
   }, [router]);
 
