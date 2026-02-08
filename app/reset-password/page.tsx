@@ -5,7 +5,7 @@ import {
   reauthenticateWithCredential,
   updatePassword,
 } from "firebase/auth";
-import { auth } from "../lib/firebase";
+import { auth } from "@/app/lib/firebase";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -53,7 +53,7 @@ export default function ResetPassword() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-700 to-blue-500 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-700 to-blue-500 px-4">
       <div className="w-full max-w-sm rounded-2xl bg-[#5882C147]/28 p-6 shadow-xl text-white border border-white/30 backdrop-blur-md">
         {/* Title */}
         <h1 className="text-2xl font-bold mb-6">Reset Password</h1>
