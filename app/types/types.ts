@@ -6,7 +6,7 @@ export interface User {
   username: string;
   email: string;
   age: number;
-  password: string | number;
+  password?: string | number;
   role: 1 | 2; // 1 admin, 2 user
   createdAt?: Timestamp;
 }

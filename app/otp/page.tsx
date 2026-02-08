@@ -10,7 +10,13 @@ export default function OTP() {
 
   const submit = () => {
     if (otp === "1234") {
-      localStorage.setItem("user", JSON.stringify(auth.currentUser));
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          uid: auth.currentUser?.uid,
+          email: auth.currentUser?.email,
+        }),
+      );
       router.push("/dashboard");
     } else {
       alert("OTP Failed");
@@ -29,7 +35,7 @@ export default function OTP() {
           <input
             onChange={(e) => setOtp(e.target.value)}
             type="OTP"
-            placeholder="Enter OTP"
+            placeholder="Enter OTP (hint: 1234)"
             className="w-full rounded-md px-3 py-2 text-gray-800 bg-amber-50"
           />
         </div>

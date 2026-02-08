@@ -1,4 +1,3 @@
-// lib/users.ts
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { db } from "./firebase";
 import { User } from "../types/types";
