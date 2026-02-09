@@ -14,8 +14,9 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-  const login = async () => {
+  const login = async (e: React.FormEvent) => {
     try {
+      e.preventDefault();
       await signInWithEmailAndPassword(auth, email, password);
       setEmail("");
       setPassword("");
