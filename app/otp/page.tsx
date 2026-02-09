@@ -8,7 +8,22 @@ export default function OTP() {
   const [otp, setOtp] = useState("");
   const router = useRouter();
 
-  const submit = () => {
+  // useEffect(() => {
+  //   if (otp === "1234") {
+  //     localStorage.setItem(
+  //       "user",
+  //       JSON.stringify({
+  //         uid: auth.currentUser?.uid,
+  //         email: auth.currentUser?.email,
+  //       }),
+  //     );
+  //     router.push("/dashboard");
+  //   } else {
+  //     alert("OTP Failed");
+  //   }
+  // }, [otp]);
+
+  const handleSubmit = () => {
     if (otp === "1234") {
       localStorage.setItem(
         "user",
@@ -43,7 +58,7 @@ export default function OTP() {
         {/* submit */}
         <button
           className="w-full bg-blue-900 hover:bg-blue-950 transition rounded-md py-2 font-semibold"
-          onClick={submit}
+          onClick={handleSubmit}
         >
           Verify
         </button>

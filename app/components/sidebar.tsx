@@ -34,6 +34,10 @@ export default function Sidebar() {
     router.push("/login");
   };
 
+  // useEffect(() => {
+  //   localStorage.clear();
+  // }, [handleLogout()]);
+
   return (
     <aside className="w-64 min-h-screen bg-gray-50 border-r px-5 py-6 border-gray-300">
       {/* Logo */}

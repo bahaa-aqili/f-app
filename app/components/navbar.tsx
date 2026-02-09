@@ -1,12 +1,19 @@
 "use client";
 
 import { Search, Bell, ChevronDown } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Navbar() {
-  const [userEmail] = useState(
-    () => JSON.parse(localStorage.getItem("user") || "{}").email || "",
-  );
+  // const [userEmail] = useState(
+  //   () => JSON.parse(localStorage.getItem("user") || "{}").email || "",
+  // );
+
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    setUserEmail(storedUser ? JSON.parse(storedUser).email : null);
+  }, []);
 
   return (
     <header className="h-16 bg-white border-b flex items-center justify-between px-6 border-gray-300">
