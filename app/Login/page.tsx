@@ -14,13 +14,12 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-  const login = async (e: React.FormEvent) => {
+  const login = async () => {
     try {
-      e.preventDefault();
       await signInWithEmailAndPassword(auth, email, password);
       setEmail("");
       setPassword("");
-      router.push("/otp");
+      router.replace("/otp");
     } catch (error) {
       console.log(error);
       alert("Login failed, Please check your email or password.");
@@ -31,7 +30,7 @@ export default function LoginPage() {
     try {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
-      router.push("/otp");
+      router.replace("/otp");
     } catch (error) {
       console.log(error);
     }
