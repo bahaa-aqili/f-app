@@ -1,11 +1,23 @@
 "use client";
 
 import { Search, Bell, ChevronDown } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 export default function Navbar() {
-  const [userEmail] = useState(
-    () => JSON.parse(localStorage.getItem("user") || "{}").email || "",
-  );
+  const [userEmail, setUserEmail] = useState("");
+
+  useEffect(() => {
+    // Read from localStorage only on client side
+    const user = localStorage.getItem("user");
+    if (user) {
+      try {
+        const parsedUser = JSON.parse(user);
+        setUserEmail(parsedUser.email || "");
+      } catch (error) {
+        console.error("Error parsing user data:", error);
+      }
+    }
+  }, []);
 
   return (
     <header className="h-16 bg-white border-b flex items-center justify-between px-6 border-gray-300">
