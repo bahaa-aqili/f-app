@@ -10,13 +10,21 @@ export default function ProtectedRoute({
 }) {
   const router = useRouter();
   console.log("ProtectedRoute");
+  async function checkAuth() {
+    try {
+      if (typeof window !== "undefined") {
+        const localUser = localStorage.getItem("user");
+        if (localUser === null) {
+          router.replace("/login");
+        }
+      }
+    } catch (error) {
+      console.error("Error checking user authentication:", error);
+    }
+  }
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
-
-    if (!user) {
-      router.replace("/login");
-    }
+    checkAuth();
   }, []);
 
   return <>{children}</>;
