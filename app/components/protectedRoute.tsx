@@ -19,6 +19,7 @@ export default function ProtectedRoute({
   const router = useRouter();
   const pathname = usePathname();
   const [isChecking, setIsChecking] = useState(true);
+  const [allowRender, setAllowRender] = useState(false);
 
   useEffect(() => {
     try {
@@ -32,19 +33,24 @@ export default function ProtectedRoute({
         ) {
           router.replace(unauthenticatedRedirectTo);
         }
+        setAllowRender(false);
         return;
       }
 
       if (!requireAuth) {
-        const target = isAuthenticated
-          ? authenticatedRedirectTo
-          : unauthenticatedRedirectTo;
+        const target = isAuthenticated ? authenticatedRedirectTo : undefined;
 
         if (target && pathname !== target) {
           router.replace(target);
+          setAllowRender(false);
+          return;
         }
+
+        setAllowRender(true);
         return;
       }
+
+      setAllowRender(true);
     } catch (error) {
       console.error("Error checking user authentication:", error);
     } finally {
@@ -66,7 +72,7 @@ export default function ProtectedRoute({
     );
   }
 
-  if (!requireAuth) {
+  if (!allowRender) {
     return null;
   }
 
