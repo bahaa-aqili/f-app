@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import ProtectedRoute from "./components/protectedRoute";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,11 +16,6 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "F-App",
   description: "User management dashboard with Firebase",
-  icons: {
-    icon: "/icon.svg",
-    shortcut: "/icon.svg",
-    apple: "/icon.svg",
-  },
 };
 
 export default function RootLayout({
@@ -34,7 +30,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <ProtectedRoute>{children}</ProtectedRoute>
       </body>
     </html>
   );

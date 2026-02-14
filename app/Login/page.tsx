@@ -86,13 +86,13 @@ export default function LoginPage() {
             className="bg-white text-black p-2 rounded-md w-12 flex justify-center"
             onClick={googleLogin}
           >
-            <Image
+            {/* <Image
               src="https://www.svgrepo.com/show/475656/google-color.svg"
               alt="Google"
               width={20}
               height={20}
               className="w-5"
-            />
+            /> */}
           </button>
         </div>
 
