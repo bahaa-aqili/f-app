@@ -32,18 +32,26 @@ export default function Home() {
 
   useEffect(() => {
     // تأكد من أننا في المتصفح
-    if (typeof window !== "undefined") {
-      const localUser = localStorage.getItem("user");
-
-      if (localUser !== null) {
-        router.replace("/dashboard");
-      } else {
-        router.replace("/login");
-      }
-    }
-    setIsChecking(false);
+    getUserInfo();
   }, [router]);
 
+  const getUserInfo = async () => {
+    try {
+      if (typeof window !== "undefined") {
+        const localUser = localStorage.getItem("user");
+
+        if (localUser !== null) {
+          router.replace("/dashboard");
+        } else {
+          router.replace("/login");
+        }
+      }
+    } catch (error) {
+      console.error("Error checking user authentication:", error);
+    } finally {
+      setIsChecking(false);
+    }
+  };
   // اعرض loader أثناء الفحص
   if (isChecking) {
     return (
