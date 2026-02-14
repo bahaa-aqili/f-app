@@ -33,7 +33,7 @@ export default function Home() {
   useEffect(() => {
     // تأكد من أننا في المتصفح
     getUserInfo();
-  }, [router]);
+  }, []);
 
   const getUserInfo = async () => {
     try {

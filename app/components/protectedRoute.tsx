@@ -10,13 +10,13 @@ export default function ProtectedRoute({
 }) {
   const router = useRouter();
 
-  // useEffect(() => {
+  useEffect(() => {
+    const user = localStorage.getItem("user");
 
-  //   if (!user) {
-  // const user = localStorage.getItem("user");
-  //   }
-  // }, []);
+    if (!user) {
+      router.replace("/login");
+    }
+  }, []);
 
-  router.replace("/login");
   return <>{children}</>;
 }
