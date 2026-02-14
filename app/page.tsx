@@ -30,6 +30,7 @@ export default function Home() {
   const router = useRouter();
   const [isChecking, setIsChecking] = useState(true);
 
+  console.log("Home");
   useEffect(() => {
     // تأكد من أننا في المتصفح
     getUserInfo();
