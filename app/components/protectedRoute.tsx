@@ -14,7 +14,9 @@ export default function ProtectedRoute({
     try {
       if (typeof window !== "undefined") {
         const localUser = localStorage.getItem("user");
-        if (localUser === null) {
+        console.log("localUser", localUser);
+
+        if (localUser == null || localUser == undefined) {
           router.replace("/login");
         }
       }
