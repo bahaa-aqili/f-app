@@ -66,5 +66,9 @@ export default function ProtectedRoute({
     );
   }
 
+  if (!requireAuth) {
+    return null;
+  }
+
   return <>{children}</>;
 }
