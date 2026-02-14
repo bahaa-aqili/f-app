@@ -1,33 +1,70 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+
+type ProtectedRouteProps = {
+  children: React.ReactNode;
+  requireAuth?: boolean;
+  authenticatedRedirectTo?: string;
+  unauthenticatedRedirectTo?: string;
+};
 
 export default function ProtectedRoute({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+  requireAuth = true,
+  authenticatedRedirectTo,
+  unauthenticatedRedirectTo = "/login",
+}: ProtectedRouteProps) {
   const router = useRouter();
-  console.log("ProtectedRoute");
-  async function checkAuth() {
-    try {
-      if (typeof window !== "undefined") {
-        const localUser = localStorage.getItem("user");
-        console.log("localUser", localUser);
+  const pathname = usePathname();
+  const [isChecking, setIsChecking] = useState(true);
 
-        if (localUser == null || localUser == undefined) {
-          router.replace("/login");
+  useEffect(() => {
+    try {
+      const localUser = localStorage.getItem("user");
+      const isAuthenticated = localUser !== null;
+
+      if (requireAuth && !isAuthenticated) {
+        if (
+          unauthenticatedRedirectTo &&
+          pathname !== unauthenticatedRedirectTo
+        ) {
+          router.replace(unauthenticatedRedirectTo);
         }
+        return;
+      }
+
+      if (!requireAuth) {
+        const target = isAuthenticated
+          ? authenticatedRedirectTo
+          : unauthenticatedRedirectTo;
+
+        if (target && pathname !== target) {
+          router.replace(target);
+        }
+        return;
       }
     } catch (error) {
       console.error("Error checking user authentication:", error);
+    } finally {
+      setIsChecking(false);
     }
-  }
+  }, [
+    requireAuth,
+    authenticatedRedirectTo,
+    unauthenticatedRedirectTo,
+    pathname,
+    router,
+  ]);
 
-  useEffect(() => {
-    checkAuth();
-  }, []);
+  if (isChecking) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-600"></div>
+      </div>
+    );
+  }
 
   return <>{children}</>;
 }
