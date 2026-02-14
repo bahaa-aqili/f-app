@@ -9,11 +9,11 @@ export default function ProtectedRoute({
   children: React.ReactNode;
 }) {
   const router = useRouter();
-  const user = localStorage.getItem("user");
 
   // useEffect(() => {
 
   //   if (!user) {
+  // const user = localStorage.getItem("user");
   //   }
   // }, []);
 
