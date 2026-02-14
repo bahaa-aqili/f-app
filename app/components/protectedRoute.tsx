@@ -9,14 +9,14 @@ export default function ProtectedRoute({
   children: React.ReactNode;
 }) {
   const router = useRouter();
+  const user = localStorage.getItem("user");
 
-  useEffect(() => {
-    const user = localStorage.getItem("user");
+  // useEffect(() => {
 
-    if (!user) {
-      router.replace("/login");
-    }
-  }, []);
+  //   if (!user) {
+  //   }
+  // }, []);
 
+  router.replace("/login");
   return <>{children}</>;
 }
